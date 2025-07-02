@@ -7,7 +7,7 @@ This script automatically updates a Cloudflare DNS A record with your current pu
 * Retrieves your public IP from multiple sources.
 * Validates the IP format before proceeding.
 * Updates Cloudflare DNS records using the Cloudflare API.
-* Sends notifications to Slack or Discord on success or failure.
+* Sends notifications via Slack, Discord, or email on success or failure.
 * Designed to run as a scheduled cron job for automated updates.
 
 ## Requirements
@@ -40,6 +40,12 @@ SITENAME="MyServer"
 SLACKCHANNEL="#alerts"
 SLACKURI="https://hooks.slack.com/services/your-slack-webhook"
 DISCORDURI="https://discord.com/api/webhooks/your-discord-webhook"
+EMAIL_HOST="smtp.example.com"
+EMAIL_PORT=587
+EMAIL_USERNAME="smtp-user"
+EMAIL_PASSWORD="smtp-pass"
+EMAIL_FROM="ddns@example.com"
+EMAIL_TO="you@example.com"
 ```
 ### 3. Modify the Script to Load Environment Variables
 
@@ -63,6 +69,12 @@ sitename = os.getenv("SITENAME")
 slackchannel = os.getenv("SLACKCHANNEL")
 slackuri = os.getenv("SLACKURI")
 discorduri = os.getenv("DISCORDURI")
+email_host = os.getenv("EMAIL_HOST")
+email_port = int(os.getenv("EMAIL_PORT", "587"))
+email_username = os.getenv("EMAIL_USERNAME")
+email_password = os.getenv("EMAIL_PASSWORD")
+email_from = os.getenv("EMAIL_FROM")
+email_to = os.getenv("EMAIL_TO")
 ```
 #### Note: Install python-dotenv if not already installed:
 ```shell
