@@ -81,11 +81,12 @@ else:
     record_identifier = record_response['result'][0]['id']
 
     # Change the IP at Cloudflare using the API
-    update_response = requests.patch(f"https://api.cloudflare.com/client/v4/zones/{zone_identifier}/dns_records/{record_identifier}",
+    update_response = requests.patch(
+        f"https://api.cloudflare.com/client/v4/zones/{zone_identifier}/dns_records/{record_identifier}",
         headers={
             "X-Auth-Email": auth_email,
-            "Authorization": f"Bearer {auth_key}",
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            **auth_header
         },
         data=json.dumps({
             "type": "A",
